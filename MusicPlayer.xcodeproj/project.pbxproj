@@ -14,6 +14,7 @@
 		3036575521E47EFE00D7720D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3036575321E47EFE00D7720D /* LaunchScreen.storyboard */; };
 		3036576021E47EFE00D7720D /* MusicPlayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3036575F21E47EFE00D7720D /* MusicPlayerTests.swift */; };
 		3036576B21E47EFF00D7720D /* MusicPlayerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3036576A21E47EFF00D7720D /* MusicPlayerUITests.swift */; };
+		30AB0E5921E52CB500A913C3 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30AB0E5821E52CB500A913C3 /* LibraryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		3036576621E47EFF00D7720D /* MusicPlayerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MusicPlayerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3036576A21E47EFF00D7720D /* MusicPlayerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicPlayerUITests.swift; sourceTree = "<group>"; };
 		3036576C21E47EFF00D7720D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		30AB0E5821E52CB500A913C3 /* LibraryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				3036574A21E47EFE00D7720D /* AppDelegate.swift */,
 				3036574C21E47EFE00D7720D /* ViewController.swift */,
+				30AB0E5821E52CB500A913C3 /* LibraryViewController.swift */,
 				3036574E21E47EFE00D7720D /* Main.storyboard */,
 				3036575121E47EFE00D7720D /* Assets.xcassets */,
 				3036575321E47EFE00D7720D /* LaunchScreen.storyboard */,
@@ -257,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3036574D21E47EFE00D7720D /* ViewController.swift in Sources */,
+				30AB0E5921E52CB500A913C3 /* LibraryViewController.swift in Sources */,
 				3036574B21E47EFE00D7720D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
