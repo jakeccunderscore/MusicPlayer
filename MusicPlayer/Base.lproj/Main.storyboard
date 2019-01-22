@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Now Playing View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="NowPlayingViewController" customModule="MusicPlayer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -158,11 +158,10 @@
                             </mask>
                         </variation>
                         <connections>
-                            <outletCollection property="gestureRecognizers" destination="Df4-xy-sKE" appends="YES" id="cN3-YI-KEC"/>
                             <outletCollection property="gestureRecognizers" destination="g4I-zp-yFM" appends="YES" id="klr-b8-vxi"/>
-                            <outletCollection property="gestureRecognizers" destination="lqb-ty-rFc" appends="YES" id="8ux-El-XUQ"/>
                             <outletCollection property="gestureRecognizers" destination="Oge-BX-hER" appends="YES" id="8Z9-BA-JUc"/>
                             <outletCollection property="gestureRecognizers" destination="xFf-an-9Ml" appends="YES" id="RKf-5B-LXa"/>
+                            <outletCollection property="gestureRecognizers" destination="eIX-Ch-Z3J" appends="YES" id="oYI-06-Wkv"/>
                         </connections>
                     </view>
                     <connections>
@@ -179,22 +178,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-                <swipeGestureRecognizer direction="left" id="Df4-xy-sKE" userLabel="Swipe Left Gesture Recognizer">
-                    <connections>
-                        <action selector="screenSwipedLeft:" destination="BYZ-38-t0r" id="yXl-dU-9pR"/>
-                    </connections>
-                </swipeGestureRecognizer>
                 <tapGestureRecognizer id="g4I-zp-yFM">
                     <connections>
                         <action selector="screenTapped:" destination="BYZ-38-t0r" id="FoC-rZ-k8g"/>
                     </connections>
                 </tapGestureRecognizer>
-                <swipeGestureRecognizer direction="right" id="lqb-ty-rFc" userLabel="Swipe Right Gesture Recognizer">
-                    <connections>
-                        <action selector="screenSwipedRight:" destination="BYZ-38-t0r" id="Kq7-IA-1Rn"/>
-                    </connections>
-                </swipeGestureRecognizer>
-                <panGestureRecognizer enabled="NO" minimumNumberOfTouches="2" id="Oge-BX-hER">
+                <panGestureRecognizer enabled="NO" minimumNumberOfTouches="2" id="Oge-BX-hER" userLabel="Two Finger Pan Gesture Recognizer">
                     <connections>
                         <action selector="screenPanned:" destination="BYZ-38-t0r" id="T3c-4F-MtX"/>
                     </connections>
@@ -204,6 +193,11 @@
                         <action selector="screenPinched:" destination="BYZ-38-t0r" id="DiK-fw-Hb6"/>
                     </connections>
                 </pinchGestureRecognizer>
+                <panGestureRecognizer minimumNumberOfTouches="1" id="eIX-Ch-Z3J" userLabel="One Finger Pan Gesture Recognizer">
+                    <connections>
+                        <action selector="screenPannedWithOneFinger:" destination="BYZ-38-t0r" id="wvs-PC-PyR"/>
+                    </connections>
+                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="21.739130434782609" y="128.57142857142856"/>
         </scene>

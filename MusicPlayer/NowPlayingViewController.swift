@@ -54,15 +54,7 @@ class NowPlayingViewController: UIViewController {
             // If the song changed, update the info on screen
             if self.MusicPlayer.nowPlayingItem !== OldSongInfo || self.MusicPlayer.nowPlayingItem == nil {
                 
-                guard
-                    let NowPlaying = self.MusicPlayer.nowPlayingItem,
-                    let Title = NowPlaying.title,
-                    let Artist = NowPlaying.artist,
-                    let Album = NowPlaying.albumTitle,
-                    let Artwork = NowPlaying.artwork?.image(at: self.MusicPlayer.nowPlayingItem?.artwork?.bounds.size ?? CGSize(width: 1024, height: 1024))
-                    else { return }
-                
-                self.updateInfo(titleLabel: Title, artistLabel: Artist, albumLabel: Album, artworkImage: Artwork, darkMode: .auto)
+                self.updateInfoWithNowPlayingItem()
                 
             }
             
@@ -94,6 +86,8 @@ class NowPlayingViewController: UIViewController {
         }
         UpdateTimer.fire()
         
+        updateInfoWithNowPlayingItem()
+        
         // Add a shadow to the album art
         AlbumImageView.layer.masksToBounds = false
         AlbumImageView.layer.shadowColor = UIColor.black.cgColor
@@ -124,35 +118,51 @@ class NowPlayingViewController: UIViewController {
         
     }
     
-    // Skip to the previous track when the screen is swiped left, or skip to the beginning of a song if in the middle of it
-    @IBAction func screenSwipedLeft(_ sender: UISwipeGestureRecognizer) {
+    var OneFingerInitialX: CGFloat = 0.0
+    var OneFingerDidTrigger: Bool = false
+    @IBAction func screenPannedWithOneFinger(_ sender: UIPanGestureRecognizer) {
         
-        if sender.state == .ended {
+        switch sender.state {
             
-            if CurrentPlaybackTime < 3 {
+        case .began:
+            OneFingerInitialX = sender.location(in: sender.view).x
+            
+        case .changed:
+            if OneFingerDidTrigger == false {
                 
-                MusicPlayer.skipToPreviousItem()
-                
-            } else {
-                
-                MusicPlayer.skipToBeginning()
+                if sender.location(in: sender.view).x > OneFingerInitialX + 20 {
+                    
+                    MusicPlayer.skipToNextItem()
+                    
+                    ImpactFG.impactOccurred()
+                    
+                    OneFingerDidTrigger = true
+                    
+                } else if sender.location(in: sender.view).x < OneFingerInitialX - 20 {
+                    
+                    if CurrentPlaybackTime < 3 {
+                        
+                        MusicPlayer.skipToPreviousItem()
+                        
+                    } else {
+                        
+                        MusicPlayer.skipToBeginning()
+                        
+                    }
+                    
+                    ImpactFG.impactOccurred()
+                    
+                    OneFingerDidTrigger = true
+                    
+                }
                 
             }
             
-            ImpactFG.impactOccurred()
+        case .ended:
+            OneFingerDidTrigger = false
             
-        }
-        
-    }
-    
-    // Skip to the next track when the screen is swiped right
-    @IBAction func screenSwipedRight(_ sender: UISwipeGestureRecognizer) {
-        
-        if sender.state == .ended {
-            
-            MusicPlayer.skipToNextItem()
-            
-            ImpactFG.impactOccurred()
+        default:
+            return
             
         }
         
@@ -280,6 +290,20 @@ class NowPlayingViewController: UIViewController {
         }
         
         TrackDurationLabel.text = formattedPlaybackDuration()
+        
+    }
+    
+    func updateInfoWithNowPlayingItem() {
+        
+        guard
+            let NowPlaying = self.MusicPlayer.nowPlayingItem,
+            let Title = NowPlaying.title,
+            let Artist = NowPlaying.artist,
+            let Album = NowPlaying.albumTitle,
+            let Artwork = NowPlaying.artwork?.image(at: self.MusicPlayer.nowPlayingItem?.artwork?.bounds.size ?? CGSize(width: 1024, height: 1024))
+            else { return }
+        
+        self.updateInfo(titleLabel: Title, artistLabel: Artist, albumLabel: Album, artworkImage: Artwork, darkMode: .auto)
         
     }
     
