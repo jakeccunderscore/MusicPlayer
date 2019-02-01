@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MediaPlayer
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -34,7 +35,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        
+        DispatchQueue(label: "AlbumCollectionQueue").async {
+            
+            for Song in MPMediaQuery.songs().items! {
+                
+                SongList.append(AlbumCellInfo(Image: Song.artwork!.image(at: Song.artwork!.bounds.size),
+                                              Title: Song.title,
+                                              Artist: Song.artist,
+                                              Album: Song.albumTitle
+                ))
+                
+            }
+            
+            for Artist in MPMediaQuery.artists().items! {
+                
+                ArtistList.append(AlbumCellInfo(Image: Artist.artwork!.image(at: Artist.artwork!.bounds.size),
+                                                Title: Artist.artist,
+                                                Artist: "0 songs",
+                    Album: ""
+                ))
+                
+            }
+            for Album in MPMediaQuery.songs().items! {
+                
+                AlbumList.append(AlbumCellInfo(Image: Album.artwork!.image(at: Album.artwork!.bounds.size),
+                                              Title: Album.albumTitle,
+                                              Artist: Album.artist,
+                                              Album: ""
+                ))
+                
+            }
+            for Playlist in MPMediaQuery.playlists().items! {
+                
+                PlaylistList.append(AlbumCellInfo(Image: Playlist.artwork!.image(at: Playlist.artwork!.bounds.size),
+                                              Title: Playlist.albumTitle,
+                                              Artist: Playlist.artist,
+                                              Album: ""
+                ))
+                
+            }
+            
+        }
+        
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
